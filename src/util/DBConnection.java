@@ -7,7 +7,7 @@ public class DBConnection {
     private static final String URL =
             "jdbc:mysql://localhost:3306/gymdb";
     private static final String USER = "root";
-    private static final String PASS = "Sowmiya@30";
+    private static final String PASS = "root"; //give your password
 
     public Connection getConnection() {
         Connection conn = null;
