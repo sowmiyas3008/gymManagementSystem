@@ -1,4 +1,4 @@
-package service;
+gitpackage service;
 
 import entity.WorkoutPlan;
 import java.util.*;
