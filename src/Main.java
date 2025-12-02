@@ -20,6 +20,7 @@ import service.MembershipDAO;
 import service.MembershipDAO_INT;
 
 import Exception.MemberExists;
+import Exception.MemberNotFound;
 
 public class Main {
 
@@ -154,8 +155,16 @@ public class Main {
 
                 case 3:
                     System.out.print("Enter id: ");
-                    Member m1 = mdao.view_mem(sc.nextInt());
-                    System.out.println(m1 != null ? m1 : "Not found");
+                    
+
+                    try{
+                        Member m1 = mdao.view_mem(sc.nextInt());
+                        System.out.println(m1 != null ? m1 : "Not found");
+
+                    }catch(MemberNotFound e){
+                        System.out.println(e.getMessage());
+                    }
+                    
                     break;
 
                 case 4:

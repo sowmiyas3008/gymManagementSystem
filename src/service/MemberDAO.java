@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import Exception.MemberExists;
+import Exception.MemberNotFound;
+
 import java.sql.SQLException;
 
 import java.util.*;
@@ -83,13 +85,17 @@ public class MemberDAO implements MemberDAO_INT{
 
     }
 
-    public Member view_mem(int id) {
+    public Member view_mem(int id) throws MemberNotFound {
         String sql = "Select * from members where mid = ?";
         try (Connection conn = db.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
+
+            if(rs == null){
+                throw new MemberNotFound("Member id" +id+ " not found");
+            }
 
 
             if (rs.next()) {
@@ -103,14 +109,14 @@ public class MemberDAO implements MemberDAO_INT{
 
 
                 );
-            } else {
-                return null;
-            }
+            } 
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return null;
+            
         }
+
+        return null;
 
     }
 
